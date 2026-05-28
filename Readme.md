@@ -20,6 +20,9 @@ Create a `.env` file in the root directory and add your OpenAI API key:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
+ALLOWED_NUMBERS=919876543210@c.us,37400642359438@lid
+BOT_NAME= MY_BOT_NAME_HERE
+BRAND_NAME= MY_BRAND_NAME_HERE
 ```
 
 ---
