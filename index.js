@@ -9,19 +9,18 @@ const CONFIG = {
   MAX_TOKENS: 500,
 
   // Your bot's name and brand
-  BOT_NAME: 'Aria',
-  BRAND_NAME: 'Rakshit Bot',
+  BOT_NAME: process.env.BOT_NAME,
+  BRAND_NAME: process.env.BRAND_NAME,
 
   SYSTEM_PROMPT:
-    'You are a helpful WhatsApp assistant called Aria. Keep replies concise and friendly. ' +
+    'You are a helpful WhatsApp assistant called ' + process.env.BOT_NAME + '. Keep replies concise and friendly. ' +
     'Use simple language. Do not use markdown formatting like ** or ## as it does not render on WhatsApp.',
 
   // Whitelist — set to false to allow everyone
   USE_WHITELIST: true,
-  ALLOWED_NUMBERS: [
-    '91XXXXXXXXXX@c.us', // <- replace with allowed numbers
-    'XXXXXXXXXXXXXX@lid',
-  ],
+  ALLOWED_NUMBERS: process.env.ALLOWED_NUMBERS
+    ? process.env.ALLOWED_NUMBERS.split(',')
+    : [],
 
   REPLY_TO_GROUPS: false,
   MAX_HISTORY: 10,
@@ -354,7 +353,16 @@ client.on('message', async (msg) => {
 
   } catch (error) {
     console.error('❌ Error:', error.message);
-    await msg.reply('Sorry, I ran into an error. Please try again in a moment.');
+    // await msg.reply('Sorry, I ran into an error. Please try again in a moment.');
+    if (error.status === 429) {
+      await msg.reply(
+        '⚠️ AI service is temporarily unavailable due to API quota limits.'
+      );
+    } else {
+      await msg.reply(
+        'Sorry, I ran into an error. Please try again later.'
+      );
+    }
   }
 });
 
