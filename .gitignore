@@ -1,0 +1,33 @@
+# Environment variables
+.env
+
+# Node modules
+node_modules/
+
+# WhatsApp auth/session
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# macOS files
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+
+# IDE files
+.vscode/
+.idea/
+
+# Build files
+dist/
+build/
+
+# Package lock (optional)
+package-lock.json
+```
